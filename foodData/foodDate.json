@@ -1,0 +1,10 @@
+{
+   "product": [
+     {
+        "productId": 1,
+        "iniPrice": 200,
+        "productName":"リンゴ",
+        "bestBeforeDate": "2"
+        }
+    ]
+}
