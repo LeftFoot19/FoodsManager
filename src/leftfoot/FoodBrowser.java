@@ -1,6 +1,6 @@
 package leftfoot;
 
-import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 
 import prottype.HardCoder;
@@ -16,7 +16,7 @@ public class FoodBrowser {
 	public static FoodData LOAD() {
 
 		//読み込めた前提
-		List<Dictionary<String, String>> foodDictionaries = HardCoder.LOAD();
+		List<HashMap<String, String>> foodDictionaries = HardCoder.LOAD();
 
 		//FoodDataインスタンス生成
 
