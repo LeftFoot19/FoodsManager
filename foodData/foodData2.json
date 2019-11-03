@@ -1,0 +1,14 @@
+{
+    "product": [
+        {
+            "iniPrice": "120",
+            "productName":"おにぎり",
+            "bestBeforeDate": "2019/11/5 12:34:56"
+        },
+        {
+            "iniPrice": "230",
+            "productName":"サンドウィッチ",
+            "bestBeforeDate": "2019/11/5 12:34:56"
+        }
+    ]
+}
