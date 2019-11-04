@@ -83,7 +83,14 @@ public class FoodBrowser {
 
 	public FoodData search(int id) {
 
-		return null;	//実装の際は削除
+		for (FoodData foodData : this.foodDatas) {
+			if(foodData.productid == id) {
+				return foodData;
+			}
+		}
+
+		//ダミー
+		return FoodData.DUMMY;
 
 	}
 
