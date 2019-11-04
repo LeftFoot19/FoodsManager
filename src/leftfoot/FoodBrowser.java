@@ -21,23 +21,21 @@ public class FoodBrowser {
 		this.foodDatas = foodDatas;
 	}
 
-	public static FoodData LOAD(String path) {
+	public static FoodBrowser LOAD(String path) {
 
+		//データファイルのディレクトリフルパス
 		String absPath = new File(path).getAbsolutePath();
 
-		//読み込めた前提
+		//辞書オブジェクト
 		List<Map<String, String>> foodDictionaries = FoodBrowser.LOADMAP(absPath);
 
+		//FoodDataインスタンス生成
+		List<FoodData> foodDatas = new ArrayList<>();
 		for (Map<String, String> map : foodDictionaries) {
-			System.out.println("+--------------+");
-			for (String key : map.keySet()) {
-				System.out.println(key + ", " + map.get(key));
-			}
+			foodDatas.add(new FoodData(map));
 		}
 
-		//FoodDataインスタンス生成
-
-		return null;	//実装の際は削除
+		return new FoodBrowser(foodDatas);	//実装の際は削除
 
 	}
 
