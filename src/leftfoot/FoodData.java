@@ -55,4 +55,41 @@ public class FoodData {
     	return string;
     }
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bestBeforeDate == null) ? 0 : bestBeforeDate.hashCode());
+		result = prime * result + iniPrice;
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + productid;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FoodData other = (FoodData) obj;
+		if (bestBeforeDate == null) {
+			if (other.bestBeforeDate != null)
+				return false;
+		} else if (!bestBeforeDate.equals(other.bestBeforeDate))
+			return false;
+		if (iniPrice != other.iniPrice)
+			return false;
+		if (productName == null) {
+			if (other.productName != null)
+				return false;
+		} else if (!productName.equals(other.productName))
+			return false;
+		if (productid != other.productid)
+			return false;
+		return true;
+	}
+
 }
