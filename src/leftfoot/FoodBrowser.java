@@ -87,4 +87,13 @@ public class FoodBrowser {
 
 	}
 
+	@Override
+	public String toString() {
+		String string = "";
+		for (FoodData foodData : this.foodDatas) {
+			string += foodData.toString() + "\n";
+		}
+		return string;
+	}
+
 }

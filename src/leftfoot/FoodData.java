@@ -28,4 +28,15 @@ public class FoodData {
 			ex.printStackTrace();
 		}
     }
+
+    @Override
+    public String toString() {
+    	String string = "ID: " + this.productid +
+    					"\nProductName: " + this.productName +
+    					"\nInitialPrice: " + this.iniPrice +
+    					"\nBestBoforeDate: " + this.bestBeforeDate.toString();
+
+    	return string;
+    }
+
 }
