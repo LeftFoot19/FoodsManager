@@ -82,6 +82,6 @@ def isFoodDict(foodDict):
 def allocateId(foodDicts):
     idAllocated = []
     for id, foodDicts in enumerate(foodDicts, 1):
-        foodDicts["productId"] = str(id)
+        foodDicts["id"] = str(id)
         idAllocated += [foodDicts]
     return idAllocated
