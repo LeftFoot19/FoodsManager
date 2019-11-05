@@ -1,5 +1,7 @@
 package leftfoot;
 
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -97,17 +99,24 @@ public class FoodBrowser {
 
 	}
 
-	public void createQR(int sizepix, String savePath) {
+	public void createQR(int matrixSize, Point imageSize, String savePath) {
 
 
 
 		for (FoodData foodData : this.foodDatas) {
 			BufferedImage qr;
-			if((qr = foodData.createQR(sizepix)) != null) {
+			if((qr = foodData.createQR(matrixSize)) != null) {
 				try {
+					//リサイズ
+					BufferedImage resizedQR = new BufferedImage((int)imageSize.getX(), (int)imageSize.getY(), qr.getType());
+					Graphics2D graphics2d = resizedQR.createGraphics();
+					graphics2d.drawImage(qr, 0, 0, resizedQR.getWidth(), resizedQR.getHeight(), null);
+					graphics2d.dispose();
 
+					//保存ファイルパス
 					String ImagePath = new File(savePath).getAbsolutePath() + "\\" + foodData.productid + "_" + foodData.productName + ".png";
-					ImageIO.write(qr, "png", new File(ImagePath));
+					//保存
+					ImageIO.write(resizedQR, "png", new File(ImagePath));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

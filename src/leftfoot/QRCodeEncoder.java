@@ -12,7 +12,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class QRCodeEncoder {
 
-	public static BufferedImage create(String source, int sizepix) {
+	public static BufferedImage create(String source, int matrixSize) {
 
 		//QRコード設定
 		ConcurrentHashMap hints = new ConcurrentHashMap();
@@ -21,13 +21,13 @@ public class QRCodeEncoder {
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 		//エンコード設定
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-		//マージン
+		//マージン(余白)
 		hints.put(EncodeHintType.MARGIN, 0);
 
 		QRCodeWriter writer = new QRCodeWriter();
 		BitMatrix bitMatrix;
 		try {
-			bitMatrix = writer.encode(source, BarcodeFormat.QR_CODE, sizepix, sizepix, hints);
+			bitMatrix = writer.encode(source, BarcodeFormat.QR_CODE, matrixSize, matrixSize, hints);
 			BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
 			return image;
 		} catch (Exception e) {
