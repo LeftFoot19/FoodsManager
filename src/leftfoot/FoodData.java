@@ -1,4 +1,5 @@
 package leftfoot;
+import java.awt.image.BufferedImage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,6 +44,10 @@ public class FoodData {
 
     	return new FoodData(map);
 
+    }
+
+    public BufferedImage createQR(int sizepix) {
+    	return QRCodeEncoder.create(String.format("%d", this.productid), sizepix);
     }
 
     @Override
