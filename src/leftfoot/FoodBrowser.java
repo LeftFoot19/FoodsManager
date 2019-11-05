@@ -1,5 +1,7 @@
 package leftfoot;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -101,16 +103,22 @@ public class FoodBrowser {
 
 	public void createQR(int matrixSize, Point imageSize, String savePath) {
 
-
-
 		for (FoodData foodData : this.foodDatas) {
 			BufferedImage qr;
 			if((qr = foodData.createQR(matrixSize)) != null) {
 				try {
 					//リサイズ
-					BufferedImage resizedQR = new BufferedImage((int)imageSize.getX(), (int)imageSize.getY(), qr.getType());
+					BufferedImage resizedQR = new BufferedImage((int)imageSize.getX(), (int)imageSize.getY() + 32, qr.getType());
 					Graphics2D graphics2d = resizedQR.createGraphics();
-					graphics2d.drawImage(qr, 0, 0, resizedQR.getWidth(), resizedQR.getHeight(), null);
+					//白Fill
+					graphics2d.setColor(Color.WHITE);
+					graphics2d.fillRect(0, 0, resizedQR.getWidth(), resizedQR.getHeight());
+					//QR表示
+					graphics2d.drawImage(qr, 0, 0, (int)imageSize.getX(), (int)imageSize.getY(), null);
+					//ラベル表示
+					graphics2d.setFont(new Font("メイリオ", Font.BOLD, 24));
+					graphics2d.setColor(Color.black);
+					graphics2d.drawString(foodData.productName, 0, resizedQR.getHeight() - 1);
 					graphics2d.dispose();
 
 					//保存ファイルパス
