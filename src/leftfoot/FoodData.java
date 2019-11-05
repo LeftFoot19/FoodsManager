@@ -11,6 +11,9 @@ public class FoodData {
     int iniPrice;
     String productName;
     Date bestBeforeDate;
+    int discountPrice1;
+    int discountPrice2;
+
 
     public static FoodData DUMMY = FoodData.getDummy();
 
@@ -20,6 +23,12 @@ public class FoodData {
 
     	String b = Dictionary.get("iniPrice");
         this.iniPrice = Integer.parseInt(b);
+
+        String c = Dictionary.get("discountPrice1");
+        this.discountPrice1 = Integer.parseInt(c);
+
+        String d = Dictionary.get("discountPrice2");
+        this.discountPrice2 = Integer.parseInt(d);
 
         this.productName = Dictionary.get("productName");
 
@@ -38,6 +47,8 @@ public class FoodData {
     	Map<String, String> map = new HashMap<String, String>();
     	map.put("id", "-1");
     	map.put("iniPrice", "0");
+    	map.put("discountPrice1","0");
+    	map.put("discountPrice2","0");
     	map.put("productName", "DUMMY");
     	map.put("bestBeforeDate", "1970/01/01 00:00:00");
 
@@ -50,6 +61,8 @@ public class FoodData {
     	String string = "ID: " + this.productid +
     					"\nProductName: " + this.productName +
     					"\nInitialPrice: " + this.iniPrice +
+    					"\nDiscountPrice1:" + this.discountPrice1 +
+    					"\nDiscountPrice2:" + this.discountPrice2 +
     					"\nBestBoforeDate: " + this.bestBeforeDate.toString();
 
     	return string;
@@ -60,6 +73,8 @@ public class FoodData {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bestBeforeDate == null) ? 0 : bestBeforeDate.hashCode());
+		result = prime * result + discountPrice1;
+		result = prime * result + discountPrice2;
 		result = prime * result + iniPrice;
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		result = prime * result + productid;
@@ -79,6 +94,10 @@ public class FoodData {
 			if (other.bestBeforeDate != null)
 				return false;
 		} else if (!bestBeforeDate.equals(other.bestBeforeDate))
+			return false;
+		if (discountPrice1 != other.discountPrice1)
+			return false;
+		if (discountPrice2 != other.discountPrice2)
 			return false;
 		if (iniPrice != other.iniPrice)
 			return false;
