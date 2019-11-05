@@ -1,11 +1,14 @@
 package leftfoot;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.imageio.ImageIO;
 
 import org.python.core.PyDictionary;
 import org.python.core.PyList;
@@ -91,6 +94,25 @@ public class FoodBrowser {
 
 		//ダミー
 		return FoodData.DUMMY;
+
+	}
+
+	public void createQR(int sizepix, String savePath) {
+
+
+
+		for (FoodData foodData : this.foodDatas) {
+			BufferedImage qr;
+			if((qr = foodData.createQR(sizepix)) != null) {
+				try {
+
+					String ImagePath = new File(savePath).getAbsolutePath() + "\\" + foodData.productid + "_" + foodData.productName + ".png";
+					ImageIO.write(qr, "png", new File(ImagePath));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 	}
 
