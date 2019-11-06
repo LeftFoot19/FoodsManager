@@ -1,11 +1,18 @@
 package leftfoot;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.imageio.ImageIO;
 
 import org.python.core.PyDictionary;
 import org.python.core.PyList;
@@ -91,6 +98,38 @@ public class FoodBrowser {
 
 		//ダミー
 		return FoodData.DUMMY;
+
+	}
+
+	public void createQR(int matrixSize, Point imageSize, String savePath) {
+
+		for (FoodData foodData : this.foodDatas) {
+			BufferedImage qr;
+			if((qr = foodData.createQR(matrixSize)) != null) {
+				try {
+					//リサイズ
+					BufferedImage resizedQR = new BufferedImage((int)imageSize.getX(), (int)imageSize.getY() + 32, qr.getType());
+					Graphics2D graphics2d = resizedQR.createGraphics();
+					//白Fill
+					graphics2d.setColor(Color.WHITE);
+					graphics2d.fillRect(0, 0, resizedQR.getWidth(), resizedQR.getHeight());
+					//QR表示
+					graphics2d.drawImage(qr, 0, 0, (int)imageSize.getX(), (int)imageSize.getY(), null);
+					//ラベル表示
+					graphics2d.setFont(new Font("メイリオ", Font.BOLD, 24));
+					graphics2d.setColor(Color.black);
+					graphics2d.drawString(foodData.productName, 0, resizedQR.getHeight() - 1);
+					graphics2d.dispose();
+
+					//保存ファイルパス
+					String ImagePath = new File(savePath).getAbsolutePath() + "\\" + foodData.productid + "_" + foodData.productName + ".png";
+					//保存
+					ImageIO.write(resizedQR, "png", new File(ImagePath));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 	}
 
