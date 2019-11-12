@@ -47,7 +47,7 @@ public class FoodData {
     }
 
     public BufferedImage createQR(int matrixSize) {
-    	return QRCodeEncoder.create(String.format("%d", this.productid), matrixSize);
+    	return QRCodeEncoder.create(String.format("FoodData:%d", this.productid), matrixSize);
     }
 
     @Override
