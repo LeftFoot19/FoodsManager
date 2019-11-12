@@ -119,6 +119,7 @@ public class FoodBrowser {
 					graphics2d.setFont(new Font("メイリオ", Font.BOLD, 24));
 					graphics2d.setColor(Color.black);
 					graphics2d.drawString(foodData.productName, 0, resizedQR.getHeight() - 1);
+					//破棄
 					graphics2d.dispose();
 
 					//保存ファイルパス
