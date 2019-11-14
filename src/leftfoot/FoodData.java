@@ -1,14 +1,16 @@
 package leftfoot;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+public class FoodData implements Serializable {
 
-public class FoodData {
+    private static final long serialVersionUID = 6418725139354087069L;
 
-    int productid;
+	int productid;
     int iniPrice;
     String productName;
     Date bestBeforeDate;
