@@ -1,6 +1,8 @@
 package leftfoot.server;
 
 import java.io.BufferedReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import org.python.jline.internal.InputStreamReader;
@@ -26,22 +28,30 @@ public class FoodThread extends Thread {
 
 		try {
 
+			ObjectInputStream objectInputStream = new ObjectInputStream(this.socket.getInputStream());
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			String text;
 
 			System.out.println("\topen socket(" + this.getId() + "): " + this.socket.getInetAddress());
 
 			//受信待ち
-			while((text = bufferedReader.readLine()) != null) {
+			while((text = (String)objectInputStream.readObject()) != null) {
 
-				System.out.println("\treceived(" + this.getId() + "): " + text);
+				System.out.println("\treceived(" + this.getId() + "): " + text);	//受信メッセージ
 				try {
-					
+
 					//検索
 					int id = Integer.parseInt(text);
 					FoodData foodData = this.foodBrowser.search(id);
 					//表示
-					System.out.println(foodData);
+					System.out.println(foodData.toString());
+
+					//出力ストリーム作成
+					ObjectOutputStream objectOutputStream = new ObjectOutputStream(this.socket.getOutputStream());
+					objectOutputStream.writeObject((Object)foodData);
+					objectOutputStream.flush();
+
+					System.out.println("returned(" + this.getId() + ")");
 
 				}catch (Exception e) {
 					e.printStackTrace();
@@ -49,6 +59,7 @@ public class FoodThread extends Thread {
 
 			}
 
+			bufferedReader.close();
 			this.disconnect();
 
 		} catch (Exception e) {
