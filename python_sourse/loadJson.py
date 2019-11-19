@@ -19,8 +19,13 @@ def loadFoodData(path):
     #Id割当
     foodDictsWithId = allocateId(foodDicts)
 
+    print(foodDictsWithId)
+
+    foodDiscountPrice = discountPrice(foodDictsWithId)
+    print(foodDiscountPrice)
+
     return foodDictsWithId
-    
+
 #指定ディレクトリからjsonファイルを辞書形式で取得
 def loadsJsonAsDict(path):
     #ファイル一覧取得
@@ -38,7 +43,7 @@ def loadsJsonAsDict(path):
     for jsonFilePath in jsonFilePathes:
         with open(jsonFilePath, "r") as jsonFile:
             jsonDicts += [json.loads(jsonFile.read(), "utf-8")]
-    
+
     return jsonDicts
 
 #ファイルごと->データごとに分割
@@ -69,7 +74,7 @@ def isFoodDict(foodDict):
 
     #bestBeforeDate
     if "bestBeforeDate" in foodDict:
-        try:    #ゴリ押し気味    
+        try:    #ゴリ押し気味
             datetime.datetime.strptime(foodDict["bestBeforeDate"], "%Y/%m/%d %H:%M:%S")
         except:
             isMathch = isMathch and False
@@ -85,3 +90,15 @@ def allocateId(foodDicts):
         foodDicts["id"] = str(id)
         idAllocated += [foodDicts]
     return idAllocated
+
+def discountPrice(foodDictsWithId):
+    discountSetPrice = []
+    for i in foodDictsWithId:
+        price = i["iniPrice"]
+        discountPrice1 = int(price) * 0.7
+        discountPrice2 = int(price) * 0.5
+        i["discountPrice1"] = str(int(discountPrice1))
+        i["discountPrice2"] = str(int(discountPrice2))
+        discountSetPrice += [i]
+
+    return discountSetPrice
