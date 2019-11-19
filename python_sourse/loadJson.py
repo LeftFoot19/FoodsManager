@@ -19,10 +19,7 @@ def loadFoodData(path):
     #Id割当
     foodDictsWithId = allocateId(foodDicts)
 
-    print(foodDictsWithId)
-
     foodDiscountPrice = discountPrice(foodDictsWithId)
-    print(foodDiscountPrice)
 
     return foodDictsWithId
 
