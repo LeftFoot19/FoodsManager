@@ -7,7 +7,6 @@ import leftfoot.FoodBrowser;
 
 public class FoodServer {
 
-	private static String IP = "172.28.8.45";
 	private static int PORT = 14200;
 
 	private FoodBrowser foodBrowser;

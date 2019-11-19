@@ -1,6 +1,7 @@
 package leftfoot.server;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -51,7 +52,7 @@ public class FoodThread extends Thread {
 					objectOutputStream.writeObject((Object)foodData);
 					objectOutputStream.flush();
 
-					System.out.println("returned(" + this.getId() + ")");
+					System.out.println("\treturned(" + this.getId() + ")");
 
 				}catch (Exception e) {
 					e.printStackTrace();
@@ -62,6 +63,8 @@ public class FoodThread extends Thread {
 			bufferedReader.close();
 			this.disconnect();
 
+		}catch (EOFException e){
+			System.out.println("\tread eof (" + this.getId() + ")");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
