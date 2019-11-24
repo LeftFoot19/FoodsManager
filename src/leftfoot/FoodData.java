@@ -38,7 +38,7 @@ public class FoodData implements Serializable {
         try {
 			String stDate = Dictionary.get("bestBeforeDate");
 
-			this.bestBeforeDate = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").parse(stDate);
+			this.bestBeforeDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(stDate);
 
 		} catch (ParseException ex) {
 			ex.printStackTrace();

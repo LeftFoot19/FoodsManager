@@ -3,12 +3,12 @@
       {
         "iniPrice": "200",
         "productName":"リンゴ",
-        "bestBeforeDate": "2019/11/5 12:34:56"
+        "bestBeforeDate": "2019/11/24 15:30:00"
       },
       {
         "iniPrice": "180",
         "productName":"バナナ",
-        "bestBeforeDate": "2019/11/5 12:34:56"
+        "bestBeforeDate": "2019/11/25 13:00:00"
       }
     ]
 }

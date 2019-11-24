@@ -1,5 +1,6 @@
 package leftfoot.server;
 
+import java.awt.Point;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -16,6 +17,7 @@ public class FoodServer {
 	public FoodServer() {
 
 		this.foodBrowser = FoodBrowser.LOAD("foodData");
+		this.foodBrowser.createQR(16, new Point(128, 128), "res/qr");
 
 	}
 

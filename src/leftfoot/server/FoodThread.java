@@ -38,24 +38,58 @@ public class FoodThread extends Thread {
 			//受信待ち
 			while((text = (String)objectInputStream.readObject()) != null) {
 
+				//受信ログ
 				System.out.println("\treceived(" + this.getId() + "): " + text);	//受信メッセージ
-				try {
 
-					//検索
-					int id = Integer.parseInt(text);
-					FoodData foodData = this.foodBrowser.search(id);
-					//表示
-					System.out.println(foodData.toString());
+				String tag, value; {
+					String[] split = text.split(":");
+					tag = split[0];
+					value = split[1];
+				}
 
-					//出力ストリーム作成
-					ObjectOutputStream objectOutputStream = new ObjectOutputStream(this.socket.getOutputStream());
-					objectOutputStream.writeObject((Object)foodData);
-					objectOutputStream.flush();
+				switch (tag) {
 
-					System.out.println("\treturned(" + this.getId() + ")");
+				//一つだけ
+				case "FD":
+					try {
 
-				}catch (Exception e) {
-					e.printStackTrace();
+						//検索
+						int id = Integer.parseInt(value);
+						FoodData foodData = this.foodBrowser.search(id);
+						//表示
+						System.out.println(foodData.toString());
+
+						//出力ストリーム作成
+						ObjectOutputStream objectOutputStream = new ObjectOutputStream(this.socket.getOutputStream());
+						objectOutputStream.writeObject((Object)foodData);
+						objectOutputStream.flush();
+
+						System.out.println("\treturned(" + this.getId() + ")");
+
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+
+				//リスト
+				case "LST":
+					try {
+						//出力ストリーム作成
+						ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+						//書き込み・送信
+						for (FoodData foodData : this.foodBrowser.foodDatas) {
+							objectOutputStream.writeObject(foodData);
+						}
+						objectOutputStream.writeObject("end");	//終了通知用
+						objectOutputStream.flush();
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+
+				default:
+					break;
 				}
 
 			}
